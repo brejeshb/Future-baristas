@@ -1,0 +1,32 @@
+{% extends 'organizations/layout.html' %}
+{% load bootstrap %}
+
+{% block title %}Event Participants - {{ event.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Event Participants - {{ event.name }}</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Booking ID</th>
+                <th scope="col">Participant Name</th>
+                <th scope="col">Skill Set</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for participant in participants %}
+            <tr>
+                <td>{{ participant.booking_id }}</td>
+                <td>{{ participant.name }}</td>
+                <td>{{ participant.skill_set }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">No participants found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

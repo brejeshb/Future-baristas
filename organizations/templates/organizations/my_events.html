@@ -1,0 +1,46 @@
+{% extends 'organizations/layout.html' %}
+{% load bootstrap %}
+
+{% block title %}My Events{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    {% if is_organization_user %}
+    <h1 class="mb-4">My Events</h1>
+    <div class="card-deck">
+        {% for event in user_events %}
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Event ID: {{ event.id }}</h5>
+                <h5 class="card-title">Name: {{ event.name }}</h5>
+                <p class="card-text">Date: {{ event.date }}</p>
+                <a href="{% url 'event_participants' event.id %}" class="btn btn-primary">View Participants</a>
+            </div>
+        </div>
+        {% empty %}
+        <p>No events found.</p>
+        {% endfor %}
+    {% endif %}
+    </div>
+
+    {% if user_participations %}
+    <h2 class="mt-5">Events You've Joined</h2>
+    <div class="card-deck">
+        {% for participation in user_participations %}
+        {% if participation.event %}
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Event ID: {{ participation.event.id }}</h5>
+                <h5 class="card-title">Name: {{ participation.event.name }}</h5>
+                <p class="card-text">Date: {{ participation.event.date }}</p>
+                <a href="{% url 'event_participants' participation.event.id %}" class="btn btn-primary">View Participants</a>
+            </div>
+        </div>
+        {% endif %}
+        {% empty %}
+        <p>No events found.</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

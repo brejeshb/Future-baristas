@@ -1,0 +1,114 @@
+
+{% extends 'organizations/layout.html' %}
+{% load bootstrap %}
+{% block title %}
+Register Participant
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mt-5">Register Participant</h1>
+    <form method="post">
+        {% csrf_token %}
+        <!-- User form fields -->
+        <div class="form-group">
+            {{ user_form.username.label_tag }}
+            {{ user_form.username }}
+            {% if user_form.username.errors %}
+                <div class="text-danger">
+                    {% for error in user_form.username.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ user_form.password1.label_tag }}
+            {{ user_form.password1 }}
+            {% if user_form.password1.errors %}
+                <div class="text-danger">
+                    {% for error in user_form.password1.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ user_form.password2.label_tag }}
+            {{ user_form.password2 }}
+            {% if user_form.password2.errors %}
+                <div class="text-danger">
+                    {% for error in user_form.password2.errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        
+        <!-- Participant form fields -->
+        <!-- Booking ID field -->
+<div class="form-group">
+    <!-- {{ participant_form.booking_id.label_tag }} -->
+    {{ participant_form.booking_id }}
+    {% if participant_form.booking_id.errors %}
+        <div class="text-danger">
+            {% for error in participant_form.booking_id.errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+<!-- Name field -->
+<div class="form-group">
+    {{ participant_form.name.label_tag }}
+    {{ participant_form.name }}
+    {% if participant_form.name.errors %}
+        <div class="text-danger">
+            {% for error in participant_form.name.errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+<!-- Skill set field -->
+<div class="form-group">
+    {{ participant_form.skill_set.label_tag }}
+    {{ participant_form.skill_set }}
+    {% if participant_form.skill_set.errors %}
+        <div class="text-danger">
+            {% for error in participant_form.skill_set.errors %}
+                {{ error }}
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+        
+        <!-- Add other participant form fields here -->
+        
+        <!-- Global form errors -->
+        {% if user_form.errors %}
+            <div class="text-danger">
+                {% for error in user_form.errors %}
+                    {{ error }}
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% if participant_form.errors %}
+            <div class="text-danger">
+                {% for error in participant_form.errors %}
+                    {{ error }}
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</div>
+{% endblock %}
+
+
+
+
+
